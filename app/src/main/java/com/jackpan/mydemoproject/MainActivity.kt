@@ -14,6 +14,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 intent.setClass(this@MainActivity,MapsActivity::class.java)
                 startActivity(intent)
             }
+            R.id.button_2 ->{
+                val intent = Intent()
+                intent.setClass(this@MainActivity,CameraActivity::class.java)
+                startActivity(intent)
+            }
             R.id.button_3 ->{
                 val intent = Intent()
                 intent.setClass(this@MainActivity,XmlActivity::class.java)
@@ -36,6 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mCameraButton = findViewById(R.id.button_2)
         mXmlButton = findViewById(R.id.button_3)
         mMapButton.setOnClickListener(this)
+        mCameraButton.setOnClickListener(this)
         mXmlButton.setOnClickListener(this)
     }
 }
