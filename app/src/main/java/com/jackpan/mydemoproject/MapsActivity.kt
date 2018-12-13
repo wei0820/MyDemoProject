@@ -18,7 +18,22 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraMoveCanceledListener, GoogleMap.OnCameraIdleListener {
+    override fun onCameraIdle() {
+
+    }
+
+    override fun onCameraMoveCanceled() {
+
+    }
+
+    override fun onCameraMoveStarted(p0: Int) {
+
+    }
+
+    override fun onCameraMove() {
+
+    }
 
     private lateinit var mMap: GoogleMap
 
