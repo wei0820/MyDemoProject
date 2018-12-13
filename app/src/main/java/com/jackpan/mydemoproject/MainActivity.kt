@@ -14,11 +14,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 intent.setClass(this@MainActivity,MapsActivity::class.java)
                 startActivity(intent)
             }
+            R.id.button_3 ->{
+                val intent = Intent()
+                intent.setClass(this@MainActivity,XmlActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
     lateinit var mMapButton: Button
     lateinit var mCameraButton:Button
+    lateinit var mXmlButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +34,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     fun initLayout(){
         mMapButton = findViewById(R.id.button_1)
         mCameraButton = findViewById(R.id.button_2)
+        mXmlButton = findViewById(R.id.button_3)
         mMapButton.setOnClickListener(this)
+        mXmlButton.setOnClickListener(this)
     }
 }
