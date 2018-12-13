@@ -13,16 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:text="camera"
         android:id="@+id/button_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:text="news"
         android:id="@+id/button_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/button_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
