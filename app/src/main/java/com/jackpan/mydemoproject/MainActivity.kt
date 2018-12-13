@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     lateinit var mMapButton: Button
+    lateinit var mCameraButton:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun initLayout(){
         mMapButton = findViewById(R.id.button_1)
+        mCameraButton = findViewById(R.id.button_2)
         mMapButton.setOnClickListener(this)
     }
 }
