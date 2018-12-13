@@ -1,8 +1,15 @@
 package com.jackpan.mydemoproject
 
+import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.ListView
+import android.widget.TextView
 import com.jackpan.mydemoproject.Data.XmlData
 import java.io.IOException
 import org.jsoup.Jsoup
@@ -10,15 +17,30 @@ import org.jsoup.Jsoup
 
 class XmlActivity : AppCompatActivity() {
     var mArrayList = ArrayList<XmlData>()
+    var mAdapter: MyAdapter? = null
+    lateinit var mProgressDialog: ProgressDialog
+
+
+    lateinit var mListView: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_xml)
         getxml()
+        mListView = findViewById(R.id.listview)
+        mAdapter = MyAdapter(mArrayList)
+        mListView.adapter =  mAdapter
+
+
 
 
     }
 
     fun getxml() {
+        mProgressDialog = ProgressDialog(this)
+        mProgressDialog.setTitle("讀取中")
+        mProgressDialog.setMessage("請稍候")
+        mProgressDialog.setCancelable(false)
+        mProgressDialog.show()
 
         Thread {
             run {
@@ -46,11 +68,8 @@ class XmlActivity : AppCompatActivity() {
 
 
                     runOnUiThread {
-                        Log.d("jack",mArrayList.size.toString())
-
-                        for (xmlData in mArrayList) {
-                            Log.d("jack",xmlData.link)
-                        }
+                        mAdapter!!.notifyDataSetChanged()
+                        mProgressDialog.dismiss()
                     }
 
                 } catch (e: IOException) {
@@ -65,5 +84,38 @@ class XmlActivity : AppCompatActivity() {
 
     }
 
+    inner class MyAdapter(var mAllData: ArrayList<XmlData>?) : BaseAdapter() {
+        fun updateData(datas: ArrayList<XmlData>) {
+            mAllData = datas
+            notifyDataSetChanged()
+        }
+
+        override fun getCount(): Int {
+            return mAllData!!.size
+        }
+
+        override fun getItem(position: Int): Any {
+            return mAllData!![position]
+        }
+
+        override fun getItemId(position: Int): Long {
+            return position.toLong()
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            var convertView = convertView
+            val data = mAllData!![position]
+            if (convertView == null) {
+                convertView = LayoutInflater.from(this@XmlActivity).inflate(
+                        R.layout.myitem, null)
+            }
+            var mTitle: TextView = convertView!!.findViewById(R.id.title)
+            var mDescription :TextView = convertView!!.findViewById(R.id.description)
+            mTitle.text = data.title
+            mDescription.text = data.description
+            return convertView
+        }
+
+    }
 
 }
