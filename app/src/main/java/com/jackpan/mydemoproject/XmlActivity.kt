@@ -1,6 +1,7 @@
 package com.jackpan.mydemoproject
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +30,14 @@ class XmlActivity : AppCompatActivity() {
         mListView = findViewById(R.id.listview)
         mAdapter = MyAdapter(mArrayList)
         mListView.adapter =  mAdapter
-
+        mListView.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent()
+            val bundle = Bundle()
+            bundle.putString("Url",mAdapter!!.mAllData!!.get(position).link)
+            intent.putExtras(bundle)
+            intent.setClass(this@XmlActivity,WebViewActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
